@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Giify</string>
+    <string name="full_screen_error">Error while initial loading</string>
+    <string name="refresh">Refresh</string>
+    <string name="realname_pattern">Realname: %1$s</string>
+    <string name="name_pattern">Nickname: %1$s</string>
+    <string name="twitter_pattern">Twitter: %1$s</string>
+    <string name="load_more">Load more</string>
+</resources>
