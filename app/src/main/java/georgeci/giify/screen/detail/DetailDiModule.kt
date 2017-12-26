@@ -7,6 +7,10 @@ import com.github.salomonbrys.kodein.erased.bind
 import com.github.salomonbrys.kodein.erased.instance
 import com.github.salomonbrys.kodein.erased.provider
 import com.github.salomonbrys.kodein.erased.singleton
+import georgeci.giify.extra.viewModelSingleton
+import georgeci.giify.screen.list.ListViewModel
+import georgeci.giify.screen.list.ListViewModelImpl
+import georgeci.giify.screen.list.diModule
 import io.reactivex.Observable
 
 fun DetailActivity.diModule(intentStream: Observable<Intent>, transitionName: String?) = Kodein.Module {
@@ -26,7 +30,7 @@ fun DetailActivity.diModule(intentStream: Observable<Intent>, transitionName: St
         )
     }
 
-    bind<DetailViewModel>() with singleton {
+    bind<DetailViewModel>() with viewModelSingleton(this@diModule) {
         DetailViewModelImpl(
                 useCase = instance(),
                 schedulers = instance()

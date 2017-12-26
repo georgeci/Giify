@@ -2,7 +2,6 @@ package georgeci.giify.screen.detail
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
-import georgeci.giify.extra.RxViewModel
 import georgeci.giify.extra.SchedulerFactory
 import georgeci.giify.model.ImageEntity
 import georgeci.giify.model.usecase.GetItemResolution
@@ -14,7 +13,7 @@ import kategory.Either
 class DetailViewModelImpl(
         private val useCase: GetItemUseCase,
         private val schedulers: SchedulerFactory
-) : RxViewModel(), DetailViewModel {
+) : DetailViewModel() {
     override val state = BehaviorRelay.createDefault<DetailState>(DetailState.Waiting)
     override val userClickIntent = PublishRelay.create<Unit>()
     override val userOpenCommand = PublishRelay.create<String>()
@@ -34,7 +33,7 @@ class DetailViewModelImpl(
                         )
                         is DetailState.Content -> {
                             val sideEffect = userClickIntent.map { oldState.item.user!!.profile_url }.subscribe(userOpenCommand)
-                            subscribeLoadByIntent(oldState).doOnDispose{
+                            subscribeLoadByIntent(oldState).doOnDispose {
                                 sideEffect.dispose()
                             }
                         }

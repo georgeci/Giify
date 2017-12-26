@@ -1,5 +1,8 @@
 package georgeci.giify.screen.list
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
@@ -8,6 +11,7 @@ import com.github.salomonbrys.kodein.erased.bind
 import com.github.salomonbrys.kodein.erased.instance
 import com.github.salomonbrys.kodein.erased.provider
 import com.github.salomonbrys.kodein.erased.singleton
+import georgeci.giify.extra.viewModelSingleton
 import georgeci.giify.screen.list.adapter.ListAdapter
 
 fun ListActivity.diModule() = Kodein.Module {
@@ -35,7 +39,7 @@ fun ListActivity.diModule() = Kodein.Module {
         )
     }
 
-    bind<ListViewModel>() with singleton {
+    bind<ListViewModel>() with viewModelSingleton(this@diModule) {
         ListViewModelImpl(
                 useCase = instance(),
                 schedulers = instance()

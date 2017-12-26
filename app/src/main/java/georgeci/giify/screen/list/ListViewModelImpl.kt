@@ -16,7 +16,7 @@ class ListViewModelImpl(
         private val useCase: GetListUseCase,
         private val schedulers: SchedulerFactory,
         private val limit: Int = 33
-) : RxViewModel(), ListViewModel {
+) :  ListViewModel() {
     override val state = BehaviorRelay.createDefault<ListState>(ListState.FullScreenProgress)
     override val routeCommand = PublishRelay.create<Pair<Int, ImageEntity>>()
     override val refreshIntent = PublishRelay.create<Unit>()
